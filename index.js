@@ -4,9 +4,14 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({ mensagem: 'API funcionando!' });
-});
+const movieRoutes = require("./routes/movieRoutes");
+
+
+app.use("/movies", movieRoutes);
+
+
+const errorHandler = require("./middlewares/errorHandler");
+app.use(errorHandler);
 
 // Iniciar servidor
 app.listen(PORT, () => {
