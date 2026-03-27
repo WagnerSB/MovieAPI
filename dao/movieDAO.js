@@ -1,11 +1,5 @@
 const { Movie, Genre } = require("../models")
 
-let moviesOld = [
-  { id: 1, title: "Toy Story (1995)", genres: ["Adventure", "Animation", "Children", "Comedy", "Fantasy"] },
-  { id: 2, title: "Jumanji (1995)", genres: ["Adventure", "Children", "Fantasy"] },
-  { id: 3, title: "Grumpier Old Men (1995)", genres: ["Comedy", "Romance"] },
-];
-
 async function findAll() {
   try {
     const movies = await Movie.findAll({

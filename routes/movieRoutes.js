@@ -1,4 +1,3 @@
-// routes/livroRoutes.js — Definição das rotas do recurso "Livros"
 
 const express = require("express");
 const router = express.Router();

@@ -7,9 +7,11 @@ const db = require('./models');
 app.use(express.json());
 
 const movieRoutes = require("./routes/movieRoutes");
+const genreRoutes = require("./routes/genreRoutes");
 
 
 app.use("/movies", movieRoutes);
+app.use("/genres", genreRoutes);
 
 
 const errorHandler = require("./middlewares/errorHandler");
