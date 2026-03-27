@@ -2,40 +2,33 @@
 const movieDAO = require("../dao/movieDAO");
 
 
-function findAll() {
-    return movieDAO.findAll();
+async function findAll() {
+    return await movieDAO.findAll();
 }
 
-function findById(id) {
-    return movieDAO.findById(id);
+async function findById(id) {
+    return await movieDAO.findById(id);
 }
 
-function create(dados) {
-    const newMovie = {
-        title: dados.title,
-        genres: dados.genres,
-    };
+async function create(dados) {
+    try {
+        const newMovie = {
+            title: dados.title,
+            genres: dados.genres,
+        };
 
-    return movieDAO.create(newMovie);
-}
-
-function update(id, dados) {
-    const movie = movieDAO.findById(id);
-
-    if (!movie) {
-        return null;
+        return await movieDAO.create(newMovie);
+    } catch (err) {
+        throw err;
     }
-
-    const updatedData = {
-        title: dados.title || movie.title,
-        genres: dados.genres || movie.genres
-    };
-
-    return movieDAO.update(id, updatedData);
 }
 
-function deleteMovie(id) {
-    const movie = movieDAO.findById(id);
+async function update(id, dados) {
+    return await movieDAO.update(id, dados);
+}
+
+async function deleteMovie(id) {
+    const movie = await movieDAO.findById(id);
 
     if (!movie) {
         return null;
