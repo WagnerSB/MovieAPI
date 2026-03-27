@@ -31,7 +31,6 @@ function authSignupMiddleware(req, res, next) {
 }
 
 function adminMiddleware(req, res, next) {
-    console.log(req.user)
   if (req.user && req.user.role == 1) {
     return next();
   }

@@ -14,6 +14,12 @@ async function findAll(req, res, next) {
 async function findById(req, res, next) {
     try {
         const id = parseInt(req.params.id);
+
+        // Validar se é você mesmo ou adm
+        if (id != req.user.id && req.user.role != 1) {
+            return res.status(403).json({ message: "Sem permissão para ver outro usuário" })
+        }
+
         const user = await userService.findById(id);
 
         if (user)
@@ -30,13 +36,11 @@ async function create(req, res, next) {
         const dados = req.body;
 
         // Validar se é um admin criando outro admin
-        // if(dados.role && dados.role == 1)
-        // {
-        //     if(user.role != 1)
-        //     {
-        //         return res.status(403).json({message: "Sem permissão para dar acesso superior"})
-        //     }
-        // }
+        if (dados.role && dados.role != 0) {
+            if (req.user.role != 1) {
+                return res.status(403).json({ message: "Sem permissão para dar acesso superior" })
+            }
+        }
 
         if (!dados.name || !dados.email || !dados.password) {
             return res.status(400).json({
@@ -58,14 +62,16 @@ async function update(req, res, next) {
         const id = parseInt(req.params.id);
         const dados = req.body;
 
-        // Validar se é um admin criando outro admin
-        // if(dados.role && dados.role == 1)
-        // {
-        //     if(user.role != 1)
-        //     {
-        //         return res.status(403).json({message: "Sem permissão para dar acesso superior"})
-        //     }
-        // }
+        if (id != req.user.id && req.user.role != 1) {
+            return res.status(403).json({ message: "Sem permissão para alterar outro usuário" })
+        }
+
+        // Validar se é um admin alterando outro admin
+        if (dados.role && dados.role != 0) {
+            if (req.user.role != 1) {
+                return res.status(403).json({ message: "Sem permissão para dar acesso superior" })
+            }
+        }
 
         if (!Number.isInteger(id)) {
             return res.status(400).json({ message: "ID inválido" });
@@ -96,8 +102,13 @@ async function update(req, res, next) {
 
 async function deleteUser(req, res, next) {
     try {
-        // TODO Validar se é você mesmo ou adm
         const id = parseInt(req.params.id);
+
+        // Validar se é você mesmo ou adm
+        if (id != req.user.id && req.user.role != 1) {
+            return res.status(403).json({ message: "Sem permissão para remover outro usuário" })
+        }
+
         const user = await userService.deleteUser(id);
 
         if (!user) {
