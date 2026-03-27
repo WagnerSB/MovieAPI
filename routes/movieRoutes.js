@@ -4,9 +4,11 @@ const router = express.Router();
 
 const movieController = require("../controllers/movieController");
 
+const { authMiddleware, adminMiddleware } = require("../middlewares/authMiddleware");
+
 
 // Cria um novo filme
-router.post("/", movieController.create);
+router.post("/", authMiddleware, adminMiddleware, movieController.create);
 
 // Lista todos os filmes
 router.get("/", movieController.findAll);
@@ -15,9 +17,9 @@ router.get("/", movieController.findAll);
 router.get("/:id", movieController.findById);
 
 // Atualiza um filme existente
-router.put("/:id", movieController.update);
+router.put("/:id", authMiddleware, adminMiddleware, movieController.update);
 
 // Remove um filme
-router.delete("/:id", movieController.deleteMovie);
+router.delete("/:id", authMiddleware, adminMiddleware, movieController.deleteMovie);
 
 module.exports = router;

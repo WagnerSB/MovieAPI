@@ -9,11 +9,13 @@ app.use(express.json());
 const movieRoutes = require("./routes/movieRoutes");
 const genreRoutes = require("./routes/genreRoutes");
 const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 
 app.use("/movies", movieRoutes);
 app.use("/genres", genreRoutes);
 app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 
 
 const errorHandler = require("./middlewares/errorHandler");
