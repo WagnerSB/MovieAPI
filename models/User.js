@@ -51,6 +51,15 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
+    // Relação com os filmes (rating)
+    User.associate = (models) => {
+        User.belongsToMany(models.Movie, {
+            through: models.Rating,
+            foreignKey: 'userId',
+            otherKey: 'movieId'
+        });
+    };
+
     User.prototype.toJSON = function () {
         const values = { ...this.get() };
         delete values.password;
