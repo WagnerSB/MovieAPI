@@ -51,9 +51,9 @@ async function update(req, res, next) {
         const dados = req.body;
         dados.user = req.user;
 
-        if (!dados.rating && !         dados.comment) {
+        if (!dados.rating && !dados.comment) {
             return res.status(400).json({
-                message: "O campo 'rating' é obrigatório"
+                message: "Um comentário ou avaliação deve ser inserido"
             });
         }
 
@@ -84,8 +84,10 @@ async function deleteRating(req, res, next) {
         }
 
         return res.status(200).json({ message: "Avaliação removida com sucesso." });
-    } catch (erro) {
-        return next(erro);
+    } catch (err) {
+        return res.status(err.status || 500).json({
+            message: err.message || "Erro interno"
+        });
     }
 }
 

@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         Movie.belongsToMany(models.Genre, {
             through: models.MovieGenre,
             foreignKey: 'movieId',
-            otherKey: 'genreId'
+            otherKey: 'genreId',
+            as: 'genres'
         });
 
         // Relação com os usuários (rating)

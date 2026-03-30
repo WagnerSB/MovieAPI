@@ -5,6 +5,7 @@ async function findAll() {
     const movies = await Movie.findAll({
       include: {
         model: Genre,
+        as: 'genres',
         through: { attributes: [] }
       }
     });
@@ -21,6 +22,7 @@ async function findById(id) {
       where: { id: id },
       include: {
         model: Genre,
+        as: 'genres',
         through: { attributes: [] }
       }
     });
@@ -53,6 +55,7 @@ async function create(movie) {
     await newMovie.reload({
       include: {
         model: Genre,
+        as: 'genres',
         through: { attributes: [] }
       }
     });
@@ -86,6 +89,7 @@ async function update(id, dados) {
     await movie.reload({
       include: {
         model: Genre,
+        as: 'genres',
         through: { attributes: [] }
       }
     });
