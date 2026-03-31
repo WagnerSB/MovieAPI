@@ -4,6 +4,10 @@ const PORT = 3000;
 
 const db = require('./models');
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./docs/swagger/index.js");
+
+
 app.use(express.json());
 
 const movieRoutes = require("./routes/movieRoutes");
@@ -12,6 +16,8 @@ const userRoutes = require("./routes/userRoutes");
 const ratingRoutes = require("./routes/ratingRoutes");
 const authRoutes = require("./routes/authRoutes");
 
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/movies", movieRoutes);
 app.use("/genres", genreRoutes);
