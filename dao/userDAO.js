@@ -1,3 +1,4 @@
+
 const { User } = require("../models")
 
 async function findAll() {
@@ -25,6 +26,12 @@ async function findById(id) {
 
 async function create(user) {
   try {
+    const existingUser = await User.findOne({ where: { email: user.email } })
+    if (existingUser) {
+      const err = new Error('Email já está em uso');
+      err.status = 400;
+      throw err;
+    }
     const newUser = await User.create({
       name: user.name,
       email: user.email,
@@ -50,6 +57,11 @@ async function update(id, dados) {
     return rows[0];
 
   } catch (err) {
+    if (err.name === "SequelizeUniqueConstraintError") {
+      const err = new Error('Email já está em uso');
+      err.status = 400;
+      throw err;
+    }
     throw err;
   }
 }

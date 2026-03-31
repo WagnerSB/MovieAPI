@@ -37,7 +37,7 @@ async function create(req, res, next) {
 
         // Validar se é um admin criando outro admin
         if (dados.role && dados.role != 0) {
-            if (req.user.role != 1) {
+            if (!req.user || req.user.role != 1) {
                 return res.status(403).json({ message: "Sem permissão para dar acesso superior" })
             }
         }
