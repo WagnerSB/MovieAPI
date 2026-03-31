@@ -3,6 +3,7 @@ const ratings = require("./ratings");
 const genres = require("./genres");
 const movies = require("./movies");
 const users = require("./users");
+const auth = require("./auth");
 const components = require("./components");
 
 module.exports = {
@@ -17,7 +18,8 @@ module.exports = {
     ...ratings,
     ...genres,
     ...movies,
-    ...users
+    ...users,
+    ...auth
   },
   components
 };

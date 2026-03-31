@@ -100,6 +100,14 @@ module.exports = {
         role: { type: "integer", example: 0 },
       }
     },
+    LoginInput: {
+      type: "object",
+      required: ["email", "password"],
+      properties: {
+        email: { type: "string", example: "johndoe@example.com" },
+        password: { type: "string", example: "minha_senha_123" }
+      }
+    },
   },
   securitySchemes: {
     bearerAuth: { type: "http", scheme: "bearer", bearerFormat: "JWT" }
