@@ -38,6 +38,7 @@ module.exports = {
     },
     GenreInput: {
       type: "object",
+      required: ["name"],
       properties: {
         name: { type: "string", example: "Comedy" }
       }
@@ -57,14 +58,15 @@ module.exports = {
     },
     MovieInput: {
       type: "object",
+      required: ["title", "genres"],
       properties: {
         title: { type: "string", example: "Toy Story (1995)" },
         genres: {
           type: "array",
           items: {
-            type: "integer",
-            example: 1
-          }
+            type: "integer"
+          },
+          example: [1, 2, 3]
         }
       }
     },
@@ -80,6 +82,16 @@ module.exports = {
       }
     },
     UserInput: {
+      type: "object",
+      required: ["name", "email", "password"],
+      properties: {
+        name: { type: "string", example: "John Doe" },
+        email: { type: "string", example: "johndoe@example.com" },
+        password: { type: "string", example: "minha_senha_123" },
+        role: { type: "integer", example: 0 },
+      }
+    },
+    UserUpdate: {
       type: "object",
       properties: {
         name: { type: "string", example: "John Doe" },
