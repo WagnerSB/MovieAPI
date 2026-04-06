@@ -5,6 +5,8 @@ const userService = require("../services/userService");
 async function findAll(req, res, next) {
     try {
         const users = await userService.findAll();
+        if (users.length === 0)
+            return res.status(204).json();
         return res.status(200).json(users);
     } catch (erro) {
         return next(erro);

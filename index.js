@@ -1,6 +1,8 @@
 const express = require('express');
+const bcrypt = require("bcrypt");
 const app = express();
 const PORT = 3000;
+const { User } = require("./models")
 
 const db = require('./models');
 
@@ -30,7 +32,22 @@ const errorHandler = require("./middlewares/errorHandler");
 app.use(errorHandler);
 
 // Iniciar servidor
-db.sequelize.sync().then((req) => {
+db.sequelize.sync().then(async () => {
+    // Verifica se já existe algum admin
+    const adminExists = await User.findOne({ where: { role: 1 } });
+
+    if (!adminExists) {
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash("admin", salt);
+        await User.create({
+            name: "admin",
+            email: "admin@admin.com",
+            password: password,
+            role: 1
+        });
+        console.log("Usuário admin criado: admin@admin.com / admin");
+    }
+
     app.listen(PORT, () => {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
     });

@@ -5,6 +5,8 @@ const movieService = require("../services/movieService");
 async function findAll(req, res, next) {
     try {
         const movies = await movieService.findAll();
+        if (movies.length === 0)
+            return res.status(204).json();
         return res.status(200).json(movies);
     } catch (erro) {
         return next(erro);

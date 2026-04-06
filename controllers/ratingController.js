@@ -5,6 +5,8 @@ const ratingService = require("../services/ratingService");
 async function findAll(req, res, next) {
     try {
         const ratings = await ratingService.findAll();
+        if (ratings.length === 0)
+            return res.status(204).json();
         return res.status(200).json(ratings);
     } catch (erro) {
         return next(erro);
