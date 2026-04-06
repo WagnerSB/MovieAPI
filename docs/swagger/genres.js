@@ -15,6 +15,12 @@ module.exports = {
                             }
                         }
                     }
+                },
+                204: {
+                    description: "Sem gêneros cadastrados",
+                    content: {
+                        "application/json": []
+                    }
                 }
             }
         },
