@@ -39,18 +39,19 @@ npm install
 ```
 
 3. Configure o banco de dados em config/config.json.
+4. Configure o JWT_SECRET do .env
 
-4. Crie a base de dados no PostgreSQL, se ainda não existir:
+5. Crie a base de dados no PostgreSQL, se ainda não existir:
 ```bash
 CREATE DATABASE movieDB;
 ```
 
-5. Popular o banco (seeding) e criar tabelas se não existir (apaga todos os dados antigos):
+6. Popular o banco (seeding) e criar tabelas se não existir (apaga todos os dados antigos):
 ```bash
 npm run seed
 ```
 
-6. Inicialize o servidor (cria tabelas se necessário):
+7. Inicialize o servidor (cria tabelas se necessário):
 ```bash
 npm start
 ```
@@ -90,7 +91,7 @@ npm start
 A construção desta API se baseou em boas práticas de desenvolvimento backend moderno, com os seguintes pontos de pesquisa e referência:
 
 - Node.js + Express: framework leve e eficiente para criação de APIs RESTful.
-- Sequelize ORM: permite gerenciar banco de dados relacional (MySQL/PostgreSQL) de forma intuitiva, incluindo associações entre tabelas (User, Movie, Genre, Rating).
+- Sequelize ORM: permite gerenciar banco de dados relacional (PostgreSQL) de forma intuitiva, incluindo associações entre tabelas (User, Movie, Genre, Rating).
 - Autenticação e Autorização:
   - Tokens JWT para proteger rotas.
   - Controle de roles (0 = user, 1 = admin).
