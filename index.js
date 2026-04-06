@@ -33,21 +33,6 @@ app.use(errorHandler);
 
 // Iniciar servidor
 db.sequelize.sync().then(async () => {
-    // Verifica se já existe algum admin
-    const adminExists = await User.findOne({ where: { role: 1 } });
-
-    if (!adminExists) {
-        const salt = await bcrypt.genSalt(10);
-        const password = await bcrypt.hash("admin", salt);
-        await User.create({
-            name: "admin",
-            email: "admin@admin.com",
-            password: password,
-            role: 1
-        });
-        console.log("Usuário admin criado: admin@admin.com / admin");
-    }
-
     app.listen(PORT, () => {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
     });

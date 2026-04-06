@@ -39,19 +39,20 @@ npm install
 ```
 
 3. Configure o banco de dados em config/config.json.
+
 4. Crie a base de dados no PostgreSQL, se ainda não existir:
 ```bash
 CREATE DATABASE movieDB;
 ```
-5. Inicialize o servidor (cria tabelas e usuário admin se necessário):
+
+5. Popular o banco (seeding) e criar tabelas se não existir (apaga todos os dados antigos):
+```bash
+npm run seed
+```
+
+6. Inicialize o servidor (cria tabelas se necessário):
 ```bash
 npm start
-```
-Usuário admin padrão criado:
-```bash
-Email: admin@admin.com
-Senha: admin
-Role: 1
 ```
 
 ---
